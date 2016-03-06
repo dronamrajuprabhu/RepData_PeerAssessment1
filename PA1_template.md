@@ -4,7 +4,9 @@ output: html_document
 ---
 
 ```{r}
+**loading datasets**
 data <- "./Desktop/activity.csv"
+**reading datasets**
 da <- read.csv(data,header = TRUE, sep = ",")
 dp <- aggregate(da$steps~da$date,da,sum, na.rm=TRUE)
 histogram1 <- hist(dp$`da$steps`, breaks=50, main = "Total number of steps", xlab = "steps", col = "blue")
@@ -16,6 +18,7 @@ da_mean <- mean(da$steps, na.rm = TRUE)
 da_mean
 ds <- aggregate(da$steps~da$interval,da, mean, na.rm=TRUE)
 plotting <-plot(ds$`da$interval`,ds$`da$steps`,type = "l", xlab = "steps", ylab = "interval", main = "Time series plot of the average number of steps taken")
+
 ```
 
 
@@ -29,6 +32,7 @@ mdata <- sum(is.na(da$steps))
 da$steps[is.na(da$steps)] <- median(da$steps, na.rm=TRUE)
 betdat<- aggregate(steps ~ date, da, sum, na.rm=TRUE)
 histogram2 <-hist(betdat$steps, breaks=30, main="Total Steps per Day with NA adjusted", xlab="Steps",col = "red")
+
 ```
 
 
@@ -41,11 +45,8 @@ da$weekend <- as.factor(ifelse(da$dayname == "Saturday" |da$dayname == "Sunday",
 library(lattice)
 plotdata <- aggregate(steps ~ interval + weekend, da, mean)
 plotting2 <- xyplot(steps ~ interval | factor(weekend), data=plotdata, aspect=1/3, type="l")
-```
 
-```{r plotting2, echo=TRUE}
-plot(plotting2)
-````
+```
 
 ## MADE BY: 
 ### Dronamraju Prabhu
